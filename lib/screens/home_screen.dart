@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spica_app/shared/card_template.dart';
 import 'package:spica_app/shared/navigation_bar_top.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -9,7 +10,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool isOpen = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,91 +44,20 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-          SizedBox(
-            width: double.infinity,
-            height: 80,
-            child: ElevatedButton(
-              onPressed: cardVisibilitySwitch,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Text(
-                        "COMPANY",
-                        style: TextStyle(
-                          color: Colors.grey[600],
-                          fontSize: 20,
-                        ),
-                      ),
-                      Text(
-                        "NAME 1",
-                        style: TextStyle(
-                            color: Colors.grey[800],
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                  Icon(
-                    isOpen ? Icons.expand_less : Icons.expand_more,
-                    color: Colors.grey[600],
-                    size: 30,
-                  ),
-                ],
-              ),
-            ),
+          const CardTemplate(
+            company: "COMPANY",
+            name: "NAME1",
           ),
-          Visibility(
-            child: Text("card1"),
-            maintainSize: true,
-            maintainAnimation: true,
-            maintainState: true,
-            visible: isOpen,
+          const CardTemplate(
+            company: "COMPANY",
+            name: "NAME2",
           ),
-          SizedBox(
-            width: double.infinity,
-            height: 80,
-            child: ElevatedButton(
-              onPressed: () {},
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Text(
-                        "COMPANY",
-                        style: TextStyle(
-                          color: Colors.grey[600],
-                          fontSize: 20,
-                        ),
-                      ),
-                      Text(
-                        "NAME 2",
-                        style: TextStyle(
-                            color: Colors.grey[800],
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                  Icon(
-                    Icons.expand_more,
-                    color: Colors.grey[600],
-                    size: 30,
-                  ),
-                ],
-              ),
-            ),
+          const CardTemplate(
+            company: "COMPANY",
+            name: "NAME3",
           ),
         ],
       ),
     );
-  }
-
-  void cardVisibilitySwitch() {
-    setState(() {
-      isOpen ? isOpen = false : isOpen = true;
-    });
   }
 }
