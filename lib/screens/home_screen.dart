@@ -6,13 +6,53 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(80),
         child: NavigationBar(),
       ),
       drawer: Text("drawer"),
-      body: Text("home"),
+      body: Column(
+        children: [
+          SizedBox(
+            width: double.infinity,
+            height: 100,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "CARD",
+                  style: TextStyle(
+                    fontSize: 30,
+                    color: Colors.grey[600],
+                  ),
+                ),
+                Text(
+                  "LIST",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30,
+                    color: Colors.grey[800],
+                  ),
+                )
+              ],
+            ),
+          ),
+          SizedBox(
+            width: double.infinity,
+            height: 80,
+            child: ElevatedButton(
+              onPressed: () {},
+              child: Text(
+                "card",
+                style: TextStyle(
+                  color: Colors.black,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
