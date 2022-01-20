@@ -11,7 +11,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(primarySwatch: Colors.pink),
+      theme: ThemeData(
+          colorScheme: ColorScheme.fromSwatch().copyWith(
+        primary: Colors.white,
+      )),
       routes: {
         '/': (context) => HomeScreen(),
       },
