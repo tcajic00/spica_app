@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spica_app/screens/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,10 +10,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text(
-      "Hello!",
-      textDirection: TextDirection.ltr,
-      textAlign: TextAlign.center,
+    return MaterialApp(
+      theme: ThemeData(primarySwatch: Colors.pink),
+      routes: {
+        '/': (context) => HomeScreen(),
+      },
+      initialRoute: '/',
     );
   }
 }
