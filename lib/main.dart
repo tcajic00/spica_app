@@ -29,12 +29,11 @@ class _MyAppState extends State<MyApp> {
                 setState(() {
                   currentCard = data;
                 });
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => CardScreen(
-                              data: currentCard,
-                            )));
+
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => CardScreen(
+                          data: currentCard,
+                        )));
               },
             ),
       },

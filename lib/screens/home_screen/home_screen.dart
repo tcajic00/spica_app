@@ -19,6 +19,32 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final List<CardData> defaultData = [
+    CardData(
+      "COMPANY",
+      "NAME1",
+      "Ivo Ivic",
+      "1234 5678 9123 4 5",
+      "12/2022",
+      1,
+    ),
+    CardData(
+      "COMPANY",
+      "NAME2",
+      "Ivo Ivic",
+      "6548 7364 8573 8 8",
+      "10/2022",
+      2,
+    ),
+    CardData(
+      "COMPANY",
+      "NAME3",
+      "Ivo Ivic",
+      "6483 6549 6385 9 7",
+      "11/2022",
+      3,
+    ),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
         preferredSize: Size.fromHeight(80),
         child: NavigationBar(),
       ),
-      drawer: SideMenu(),
+      drawer: const SideMenu(),
       body: Column(
         children: [
           SizedBox(
@@ -53,41 +79,20 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-          CardTemplate(
-            data: CardData(
-              "COMPANY",
-              "NAME1",
-              "Ivo Ivic",
-              "1234 5678 9123 4 5",
-              "12/2022",
-              1,
-            ),
-            setCard: widget.selectCard,
-          ),
-          CardTemplate(
-            data: CardData(
-              "COMPANY",
-              "NAME2",
-              "Ivo Ivic",
-              "6548 7364 8573 8 8",
-              "10/2022",
-              2,
-            ),
-            setCard: widget.selectCard,
-          ),
-          CardTemplate(
-            data: CardData(
-              "COMPANY",
-              "NAME3",
-              "Ivo Ivic",
-              "6483 6549 6385 9 7",
-              "11/2022",
-              3,
-            ),
-            setCard: widget.selectCard,
+          Column(
+            children: _cardList(),
           ),
         ],
       ),
     );
+  }
+
+  List<Widget> _cardList() {
+    return defaultData
+        .map((data) => CardTemplate(
+              data: data,
+              setCard: widget.selectCard,
+            ))
+        .toList();
   }
 }
