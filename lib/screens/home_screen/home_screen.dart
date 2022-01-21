@@ -1,9 +1,18 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
+import 'package:spica_app/data/card_data.dart';
 import 'package:spica_app/screens/home_screen/card_template.dart';
 import 'package:spica_app/shared/navigation_bar_top.dart';
+import 'package:spica_app/shared/side_menu.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  final Function(CardData)? selectCard;
+
+  const HomeScreen({
+    Key? key,
+    this.selectCard,
+  }) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -17,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
         preferredSize: Size.fromHeight(80),
         child: NavigationBar(),
       ),
-      drawer: const Text("drawer"),
+      drawer: SideMenu(),
       body: Column(
         children: [
           SizedBox(
@@ -44,26 +53,38 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-          const CardTemplate(
-            company: "COMPANY",
-            name: "NAME1",
-            username: "Ivo Ivic",
-            cardNumber: "1234 5678 9123 4 5",
-            validUntil: "12/2022",
+          CardTemplate(
+            data: CardData(
+              "COMPANY",
+              "NAME1",
+              "Ivo Ivic",
+              "1234 5678 9123 4 5",
+              "12/2022",
+              1,
+            ),
+            setCard: widget.selectCard,
           ),
-          const CardTemplate(
-            company: "COMPANY",
-            name: "NAME2",
-            username: "Ivo Ivic",
-            cardNumber: "6548 7364 8573 8 8",
-            validUntil: "10/2022",
+          CardTemplate(
+            data: CardData(
+              "COMPANY",
+              "NAME2",
+              "Ivo Ivic",
+              "6548 7364 8573 8 8",
+              "10/2022",
+              2,
+            ),
+            setCard: widget.selectCard,
           ),
-          const CardTemplate(
-            company: "COMPANY",
-            name: "NAME3",
-            username: "Ivo Ivic",
-            cardNumber: "6483 6549 6385 9 7",
-            validUntil: "11/2022",
+          CardTemplate(
+            data: CardData(
+              "COMPANY",
+              "NAME3",
+              "Ivo Ivic",
+              "6483 6549 6385 9 7",
+              "11/2022",
+              3,
+            ),
+            setCard: widget.selectCard,
           ),
         ],
       ),
