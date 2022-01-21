@@ -1,22 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:spica_app/data/card_data.dart';
 
 class CardTemplate extends StatefulWidget {
-  final String company;
-  final String name;
-  final String username;
-  final String cardNumber;
-  final String validUntil;
-  final int cardId;
-  final Function(int)? setCard;
+  final Function(CardData)? setCard;
+  final CardData data;
   const CardTemplate({
     Key? key,
-    required this.company,
-    required this.name,
-    required this.username,
-    required this.cardNumber,
-    required this.validUntil,
-    required this.cardId,
     this.setCard,
+    required this.data,
   }) : super(key: key);
 
   @override
@@ -40,14 +31,14 @@ class _CardTemplateState extends State<CardTemplate> {
                 Row(
                   children: [
                     Text(
-                      widget.company,
+                      widget.data.company,
                       style: TextStyle(
                         color: Colors.grey[600],
                         fontSize: 20,
                       ),
                     ),
                     Text(
-                      widget.name,
+                      widget.data.name,
                       style: TextStyle(
                           color: Colors.grey[800],
                           fontSize: 20,
@@ -83,7 +74,7 @@ class _CardTemplateState extends State<CardTemplate> {
                   ),
                   child: TextButton(
                     onPressed: () {
-                      widget.setCard!(widget.cardId);
+                      widget.setCard!(widget.data);
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(12.0),
@@ -111,7 +102,7 @@ class _CardTemplateState extends State<CardTemplate> {
                             child: Row(
                               children: [
                                 Text(
-                                  widget.username,
+                                  widget.data.username,
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 20,
@@ -126,7 +117,7 @@ class _CardTemplateState extends State<CardTemplate> {
                               bottom: 30,
                             ),
                             child: Text(
-                              widget.cardNumber,
+                              widget.data.cardNumber,
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 50,
@@ -148,14 +139,14 @@ class _CardTemplateState extends State<CardTemplate> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                widget.validUntil,
+                                widget.data.validUntil,
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,
                                 ),
                               ),
                               Text(
-                                widget.company + widget.name,
+                                widget.data.company + widget.data.name,
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,

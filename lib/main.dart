@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spica_app/data/card_data.dart';
 import 'package:spica_app/screens/card_screen/card_screen.dart';
 import 'package:spica_app/screens/home_screen/home_screen.dart';
 
@@ -14,7 +15,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  int? currentCardId;
+  CardData currentCard = CardData('', '', '', '', '', 0);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -24,15 +25,16 @@ class _MyAppState extends State<MyApp> {
       )),
       routes: {
         '/': (context) => HomeScreen(
-              selectCard: (int id) {
+              selectCard: (CardData data) {
                 setState(() {
-                  currentCardId = id;
+                  currentCard = data;
                 });
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>
-                            CardScreen(cardId: currentCardId!)));
+                        builder: (context) => CardScreen(
+                              data: currentCard,
+                            )));
               },
             ),
       },
