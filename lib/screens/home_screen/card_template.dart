@@ -6,6 +6,8 @@ class CardTemplate extends StatefulWidget {
   final String username;
   final String cardNumber;
   final String validUntil;
+  final int cardId;
+  final Function(int)? setCard;
   const CardTemplate({
     Key? key,
     required this.company,
@@ -13,6 +15,8 @@ class CardTemplate extends StatefulWidget {
     required this.username,
     required this.cardNumber,
     required this.validUntil,
+    required this.cardId,
+    this.setCard,
   }) : super(key: key);
 
   @override
@@ -77,33 +81,81 @@ class _CardTemplateState extends State<CardTemplate> {
                     ),
                     color: Colors.pink[300],
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
-                            Text(
-                              "SPICACARD",
+                  child: TextButton(
+                    onPressed: () {
+                      widget.setCard!(widget.cardId);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: const [
+                              Text(
+                                "SPICACARD",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 32,
+                                ),
+                              ),
+                              Icon(
+                                Icons.nfc_outlined,
+                                color: Colors.white,
+                                size: 50,
+                              ),
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 20),
+                            child: Row(
+                              children: [
+                                Text(
+                                  widget.username,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                              top: 10.0,
+                              bottom: 30,
+                            ),
+                            child: Text(
+                              widget.cardNumber,
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 32,
+                                fontSize: 50,
                               ),
                             ),
-                            Icon(
-                              Icons.nfc_outlined,
-                              color: Colors.white,
-                              size: 50,
-                            ),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 20),
-                          child: Row(
+                          ),
+                          Row(
+                            children: const [
+                              Text(
+                                "VALID UNTIL",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                widget.username,
+                                widget.validUntil,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                ),
+                              ),
+                              Text(
+                                widget.company + widget.name,
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,
@@ -111,51 +163,8 @@ class _CardTemplateState extends State<CardTemplate> {
                               ),
                             ],
                           ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                            top: 10.0,
-                            bottom: 30,
-                          ),
-                          child: Text(
-                            widget.cardNumber,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 50,
-                            ),
-                          ),
-                        ),
-                        Row(
-                          children: const [
-                            Text(
-                              "VALID UNTIL",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 15,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              widget.validUntil,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                              ),
-                            ),
-                            Text(
-                              widget.company + widget.name,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
