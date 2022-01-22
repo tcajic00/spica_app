@@ -230,6 +230,20 @@ class _CardScreenState extends State<CardScreen> {
               ],
             ),
           ),
+          SizedBox(
+            height: 50,
+            width: 230,
+            child: TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: Colors.grey[600],
+              ),
+              onPressed: () {},
+              child: const Text(
+                "View monthly report",
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+          ),
         ],
       ),
     );
