@@ -4,6 +4,7 @@ import 'package:spica_app/data/table_row_data.dart';
 import 'package:spica_app/screens/card_screen/table_row_template.dart';
 import 'package:spica_app/shared/navigation_bar_top.dart';
 import 'package:spica_app/shared/side_menu.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class CardScreen extends StatefulWidget {
   final CardData data;
@@ -85,6 +86,7 @@ class _CardScreenState extends State<CardScreen> {
       "Came to work",
     ),
   ];
+  bool datePicker = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,49 +97,116 @@ class _CardScreenState extends State<CardScreen> {
       drawer: SideMenu(),
       body: Column(
         children: [
-          SizedBox(
-            height: 300,
+          Visibility(
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 15.0,
-                horizontal: 200.0,
+              padding: const EdgeInsets.all(10.0),
+              child: SizedBox(
+                width: 450,
+                height: 350,
+                child: SfDateRangePicker(
+                  maxDate: DateTime.now(),
+                  minDate: DateTime(1997),
+                  backgroundColor: Colors.grey[300],
+                  onCancel: datePickerSwitch,
+                  showActionButtons: true,
+                  confirmText: "",
+                  selectionColor: Colors.pink[200],
+                  todayHighlightColor: Colors.pink[300],
+                  headerHeight: 50,
+                  showTodayButton: true,
+                ),
               ),
-              child: Center(
-                child: Container(
-                  width: 500,
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(25),
+            ),
+            visible: datePicker,
+          ),
+          Visibility(
+            child: SizedBox(
+              height: 300,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 15.0,
+                  horizontal: 200.0,
+                ),
+                child: Center(
+                  child: Container(
+                    width: 500,
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(25),
+                      ),
+                      color: Colors.pink[300],
                     ),
-                    color: Colors.pink[300],
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
-                            Text(
-                              "SPICACARD",
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: const [
+                              Text(
+                                "SPICACARD",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 32,
+                                ),
+                              ),
+                              Icon(
+                                Icons.nfc_outlined,
+                                color: Colors.white,
+                                size: 50,
+                              ),
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 20),
+                            child: Row(
+                              children: [
+                                Text(
+                                  widget.data.username,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                              top: 10.0,
+                              bottom: 30,
+                            ),
+                            child: Text(
+                              widget.data.cardNumber,
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 32,
+                                fontSize: 50,
                               ),
                             ),
-                            Icon(
-                              Icons.nfc_outlined,
-                              color: Colors.white,
-                              size: 50,
-                            ),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 20),
-                          child: Row(
+                          ),
+                          Row(
+                            children: const [
+                              Text(
+                                "VALID UNTIL",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                widget.data.username,
+                                widget.data.validUntil,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                ),
+                              ),
+                              Text(
+                                widget.data.company + widget.data.name,
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,
@@ -145,56 +214,16 @@ class _CardScreenState extends State<CardScreen> {
                               ),
                             ],
                           ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                            top: 10.0,
-                            bottom: 30,
-                          ),
-                          child: Text(
-                            widget.data.cardNumber,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 50,
-                            ),
-                          ),
-                        ),
-                        Row(
-                          children: const [
-                            Text(
-                              "VALID UNTIL",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 15,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              widget.data.validUntil,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                              ),
-                            ),
-                            Text(
-                              widget.data.company + widget.data.name,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
+            visible: !datePicker,
+            maintainState: true,
+            maintainAnimation: true,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -230,23 +259,56 @@ class _CardScreenState extends State<CardScreen> {
               ],
             ),
           ),
-          SizedBox(
-            height: 50,
-            width: 230,
-            child: TextButton(
-              style: TextButton.styleFrom(
-                backgroundColor: Colors.grey[600],
+          Visibility(
+            visible: !datePicker,
+            child: SizedBox(
+              height: 50,
+              width: 230,
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.grey[600],
+                ),
+                onPressed: datePickerSwitch,
+                child: const Text(
+                  "View monthly report",
+                  style: TextStyle(fontSize: 20),
+                ),
               ),
-              onPressed: () {},
-              child: const Text(
-                "View monthly report",
-                style: TextStyle(fontSize: 20),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: SizedBox(
+              height: 50,
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.grey[600],
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, '/');
+                },
+                child: const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    "Back",
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
               ),
             ),
           ),
         ],
       ),
     );
+  }
+
+  void datePickerSwitch() {
+    setState(() {
+      datePicker ? datePicker = false : datePicker = true;
+    });
   }
 
   List<Widget> _tableRowList(cardId) {
