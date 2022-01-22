@@ -51,6 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(80),
         child: NavigationBar(),
+        
       ),
       drawer: const SideMenu(),
       body: Column(

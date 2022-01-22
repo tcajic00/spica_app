@@ -6,7 +6,10 @@ class NavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      iconTheme: IconThemeData(color: Colors.grey[800]),
+      iconTheme: IconThemeData(
+        color: Colors.grey[800],
+        size: 35,
+      ),
       title: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
@@ -14,6 +17,7 @@ class NavigationBar extends StatelessWidget {
             'SPIC',
             style: TextStyle(
               color: Colors.grey[700],
+              fontSize: 35,
             ),
           ),
           Text(
@@ -21,12 +25,14 @@ class NavigationBar extends StatelessWidget {
             style: TextStyle(
               color: Colors.grey[800],
               fontWeight: FontWeight.w900,
+              fontSize: 35,
             ),
           ),
           Text(
             'PP',
             style: TextStyle(
               color: Colors.grey[700],
+              fontSize: 35,
             ),
           ),
         ],
