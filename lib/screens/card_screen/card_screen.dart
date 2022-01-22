@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:spica_app/data/card_data.dart';
+import 'package:spica_app/data/table_row_data.dart';
+import 'package:spica_app/screens/card_screen/table_row_template.dart';
 import 'package:spica_app/shared/navigation_bar_top.dart';
 import 'package:spica_app/shared/side_menu.dart';
 
@@ -15,6 +17,74 @@ class CardScreen extends StatefulWidget {
 }
 
 class _CardScreenState extends State<CardScreen> {
+  final List<TableRowData> activityData1 = [
+    TableRowData(
+      "12.12.2021.",
+      "15:35",
+      "Left work",
+    ),
+    TableRowData(
+      "12.12.2021.",
+      "12:15",
+      "Came from a break",
+    ),
+    TableRowData(
+      "12.12.2021.",
+      "11:30",
+      "Went on a break",
+    ),
+    TableRowData(
+      "12.12.2021.",
+      "7:35",
+      "Came to work",
+    ),
+  ];
+
+  final List<TableRowData> activityData2 = [
+    TableRowData(
+      "13.12.2021.",
+      "16:35",
+      "Left work",
+    ),
+    TableRowData(
+      "13.12.2021.",
+      "13:15",
+      "Came from a break",
+    ),
+    TableRowData(
+      "13.12.2021.",
+      "12:30",
+      "Went on a break",
+    ),
+    TableRowData(
+      "13.12.2021.",
+      "8:35",
+      "Came to work",
+    ),
+  ];
+
+  final List<TableRowData> activityData3 = [
+    TableRowData(
+      "14.12.2021.",
+      "16:35",
+      "Left work",
+    ),
+    TableRowData(
+      "14.12.2021.",
+      "13:15",
+      "Came from a break",
+    ),
+    TableRowData(
+      "14.12.2021.",
+      "12:30",
+      "Went on a break",
+    ),
+    TableRowData(
+      "14.12.2021.",
+      "8:35",
+      "Came to work",
+    ),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -147,8 +217,53 @@ class _CardScreenState extends State<CardScreen> {
                   ))
             ],
           ),
+          Padding(
+            padding: const EdgeInsets.all(30.0),
+            child: Column(
+              children: [
+                TableRowTemplate(
+                  data: TableRowData("DATE", "TIME", "ACTION"),
+                ),
+                Column(
+                  children: _tableRowList(widget.data.cardId),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
+  }
+
+  List<Widget> _tableRowList(cardId) {
+    if (cardId == 1) {
+      return activityData1
+          .map(
+            (data) => TableRowTemplate(
+              data: data,
+            ),
+          )
+          .toList();
+    } else if (cardId == 2) {
+      return activityData2
+          .map(
+            (data) => TableRowTemplate(
+              data: data,
+            ),
+          )
+          .toList();
+    } else if (cardId == 3) {
+      return activityData3
+          .map(
+            (data) => TableRowTemplate(
+              data: data,
+            ),
+          )
+          .toList();
+    } else {
+      return [
+        Text("No data!"),
+      ];
+    }
   }
 }
