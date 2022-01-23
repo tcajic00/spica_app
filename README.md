@@ -6,4 +6,4 @@ Spica app created in Flutter.
 
 Home screen with cards list
 
-![alt text](lib\screenshots\HomeScreen.png?raw=true "Home Screen")
+![alt text](lib\screenshots\HomeScreen.png)
